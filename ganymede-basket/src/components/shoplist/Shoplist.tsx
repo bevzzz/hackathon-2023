@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Autocompleter from "../autocompleter/Autocompleter";
 import ListItem from "./ListItem";
+import CheckIcon from '@mui/icons-material/Check';
 
 export default function Shoplist(): JSX.Element {
     const [items, setItems] = useState<Array<string>>([]);
@@ -24,6 +25,7 @@ export default function Shoplist(): JSX.Element {
     }
     return (
         <div className='shop-list'>
+            <input placeholder="Name of basket" type="text" className="autocomplete-input"></input>
             <Autocompleter addItem={addItem}></Autocompleter>
             <div className='list-container pt-3'>
                 {
@@ -34,6 +36,9 @@ export default function Shoplist(): JSX.Element {
                         </div>
                     )
                 }
+            </div>
+            <div className="fixed bottom-20 left-0 justify-center w-full flex">
+                <span className="px-6 py-2 rounded-2xl bg-[#027e6a]"><CheckIcon htmlColor="white"></CheckIcon></span>
             </div>
         </div>
     )

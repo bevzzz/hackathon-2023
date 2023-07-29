@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <main>
-      <div className="mt-20 mb-20 container px-4">
+      <div className="mt-20 mb-44 container px-4">
         <div className='font-bold text-lg'>
           Create Basket
         </div>
