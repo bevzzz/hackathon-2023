@@ -18,10 +18,10 @@ export default function Home() {
         <Shoplist></Shoplist>
       </div>
       <div className='fixed w-full bottom-4 flex justify-center'>
-        <div className='bg-[#04fbd3] p-3 rounded-xl flex gap-4'>
+        <div className='bg-[#04fbd3] p-3 rounded-xl flex gap-4 drop-shadow-lg'>
           <HomeIcon htmlColor='white'></HomeIcon>
-          <AddIcon htmlColor='white'></AddIcon>
-          <ListIcon htmlColor='white'></ListIcon>
+          <AddIcon htmlColor='grey'></AddIcon>
+          <ListIcon htmlColor='grey'></ListIcon>
         </div>
       </div>
     </main>
