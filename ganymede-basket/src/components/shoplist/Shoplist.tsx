@@ -24,9 +24,6 @@ export default function Shoplist(): JSX.Element {
     }
     return (
         <div className='shop-list'>
-            <div className='title font-bold text-lg'>
-                Basket
-            </div>
             <Autocompleter addItem={addItem}></Autocompleter>
             <div className='list-container pt-3'>
                 {
