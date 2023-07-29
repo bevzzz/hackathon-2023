@@ -1,16 +1,34 @@
+import { useState } from "react";
 import Autocompleter from "../autocompleter/Autocompleter";
 import ListItem from "./ListItem";
 
 export default function Shoplist(): JSX.Element {
+    const [items, setItems] = useState<Array<string>>(["item1"]);
+
+    const handleRemoveItem = (idx: number) => {
+        // assigning the list to temp variable
+        const temp = [...items];
+
+        // removing the element using splice
+        temp.splice(idx, 1);
+
+        // updating the list
+        setItems(temp);
+    };
     return (
         <div className='shop-list'>
             <div className='title font-bold text-lg'>
                 Shoplist
             </div>
             <div className='list-container pt-3'>
-                <ListItem></ListItem>
-                <ListItem></ListItem>
-                <ListItem></ListItem>
+                {
+                    items.map((_item, index) =>
+                        <div key={index} className="flex">
+                            <ListItem></ListItem>
+                            <span onClick={() => handleRemoveItem(index)} className="ml-4 px-2 text-white my-auto rounded-2xl bg-red-500">-</span>
+                        </div>
+                    )
+                }
             </div>
             <Autocompleter></Autocompleter>
         </div>

@@ -15,7 +15,7 @@ export default function ListItem(): JSX.Element {
                 <span className={`${unit === "liter" ? "text-black" : ""}`}>liter</span>
             </div>
             <div className='pr-2 flex justify-between w-12 text-gray-500'>
-                <span onClick={() => { setCount(count - 1) }}>-</span>
+                <span onClick={() => { if (count > 1) setCount(count - 1) }}>-</span>
                 <span>|</span>
                 <span onClick={() => { setCount(count + 1) }}>+</span>
             </div>

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import connect from "@/middleware/database";
 
 interface CreateBasket {
-    user: 1;
+    user?: 1;
     products: string[];
 }
 
