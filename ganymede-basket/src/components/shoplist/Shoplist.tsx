@@ -5,6 +5,7 @@ import CheckIcon from '@mui/icons-material/Check';
 
 export default function Shoplist(): JSX.Element {
     const [items, setItems] = useState<Array<string>>([]);
+    const [serveCounter, setServeCounter] = useState<number>(1);
 
     const handleRemoveItem = (idx: number) => {
         // assigning the list to temp variable
@@ -27,6 +28,17 @@ export default function Shoplist(): JSX.Element {
         <div className='shop-list'>
             <input placeholder="Name of basket" type="text" className="autocomplete-input"></input>
             <Autocompleter addItem={addItem}></Autocompleter>
+            <div className="flex">
+                <span className="flex">
+                    Number of servings:
+                    <span className="px-2"> {serveCounter} </span>
+                    <div className='pl-4 pr-2 flex gap-4 justify-between w-12 text-gray-500'>
+                        <span onClick={() => { if (serveCounter > 1) setServeCounter(serveCounter - 1) }}>-</span>
+                        <span>|</span>
+                        <span onClick={() => { setServeCounter(serveCounter + 1) }}>+</span>
+                    </div>
+                </span>
+            </div>
             <div className='list-container pt-3'>
                 {
                     items.map((item, index) =>
