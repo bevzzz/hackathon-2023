@@ -15,11 +15,18 @@ export default function Shoplist(): JSX.Element {
         // updating the list
         setItems(temp);
     };
+
+    const addItem = (name: string) => {
+        const tempItems = [...items];
+        tempItems.push(name);
+        setItems(tempItems);
+    }
     return (
         <div className='shop-list'>
             <div className='title font-bold text-lg'>
-                Shoplist
+                Basket
             </div>
+            <Autocompleter addItem={addItem}></Autocompleter>
             <div className='list-container pt-3'>
                 {
                     items.map((_item, index) =>
@@ -30,7 +37,6 @@ export default function Shoplist(): JSX.Element {
                     )
                 }
             </div>
-            <Autocompleter></Autocompleter>
         </div>
     )
 }
