@@ -3,7 +3,7 @@ import Autocompleter from "../autocompleter/Autocompleter";
 import ListItem from "./ListItem";
 
 export default function Shoplist(): JSX.Element {
-    const [items, setItems] = useState<Array<string>>(["item1"]);
+    const [items, setItems] = useState<Array<string>>([]);
 
     const handleRemoveItem = (idx: number) => {
         // assigning the list to temp variable
@@ -29,9 +29,9 @@ export default function Shoplist(): JSX.Element {
             <Autocompleter addItem={addItem}></Autocompleter>
             <div className='list-container pt-3'>
                 {
-                    items.map((_item, index) =>
+                    items.map((item, index) =>
                         <div key={index} className="flex">
-                            <ListItem></ListItem>
+                            <ListItem name={item}></ListItem>
                             <span onClick={() => handleRemoveItem(index)} className="ml-4 px-2 text-white my-auto rounded-2xl bg-red-500">-</span>
                         </div>
                     )

@@ -2,13 +2,13 @@ import { useState } from "react";
 
 type TUnit = "stk" | "Kg" | "liter";
 
-export default function ListItem(): JSX.Element {
+export default function ListItem(props: { name: string }): JSX.Element {
     const [count, setCount] = useState<number>(1);
     const [unit, setUnit] = useState<TUnit>("stk");
 
     return (
         <div className='shop-list-item'>
-            <span><span>{count}x </span>Brot</span>
+            <span><span>{count}x </span>{props.name}</span>
             <div className='flex justify-between w-24 text-gray-500'>
                 <span className={`${unit === "stk" ? "text-black" : ""}`}>stk</span>
                 <span className={`${unit === "Kg" ? "text-black" : ""}`}>Kg</span>
