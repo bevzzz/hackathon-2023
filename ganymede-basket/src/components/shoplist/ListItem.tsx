@@ -8,7 +8,7 @@ export default function ListItem(props: { name: string }): JSX.Element {
 
     return (
         <div className='shop-list-item'>
-            <span><span>{count}x </span>{props.name}</span>
+            <span className="max-w-[50px]"><span>{count}x </span>{props.name}</span>
             <div className='flex justify-between w-24 text-gray-500'>
                 <span className={`${unit === "stk" ? "text-black" : ""}`}>stk</span>
                 <span className={`${unit === "Kg" ? "text-black" : ""}`}>Kg</span>
