@@ -17,6 +17,7 @@ export default function Shoplist(): JSX.Element {
     };
 
     const addItem = (name: string) => {
+        if (name.length < 2) return;
         const tempItems = [...items];
         tempItems.push(name);
         setItems(tempItems);
