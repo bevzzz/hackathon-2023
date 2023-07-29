@@ -33,7 +33,7 @@ export default function Shoplist(): JSX.Element {
                     items.map((item, index) =>
                         <div key={index} className="flex">
                             <ListItem name={item}></ListItem>
-                            <span onClick={() => handleRemoveItem(index)} className="ml-4 px-2 text-white my-auto rounded-2xl bg-red-500">-</span>
+                            <span onClick={() => handleRemoveItem(index)} className="ml-2 px-2 text-white my-auto rounded-2xl bg-red-500">-</span>
                         </div>
                     )
                 }
