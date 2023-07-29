@@ -1,6 +1,8 @@
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Shoplist from '@/components/shoplist/Shoplist'
+import HomeIcon from '@mui/icons-material/Home';
+import AddIcon from '@mui/icons-material/Add';
+import ListIcon from '@mui/icons-material/List';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +17,13 @@ export default function Home() {
       <div className="mt-14 container px-4">
         <Shoplist></Shoplist>
       </div>
-    </main >
+      <div className='fixed w-full bottom-4 flex justify-center'>
+        <div className='bg-[#04fbd3] p-3 rounded-xl flex gap-4'>
+          <HomeIcon htmlColor='white'></HomeIcon>
+          <AddIcon htmlColor='white'></AddIcon>
+          <ListIcon htmlColor='white'></ListIcon>
+        </div>
+      </div>
+    </main>
   )
 }
