@@ -10,22 +10,22 @@ type Props = {
     recipe: RecipeCalculated;
 }
 
-const RecipeCard = ({recipe}: Props): JSX.Element => {
+const RecipeCard = ({ recipe }: Props): JSX.Element => {
     return (
-        <Card sx={{ maxWidth: 345 }} className="m-2">
+        <Card className="m-2">
             <CardActionArea className={`grayscale${recipe.complete ? '-0' : ''}`} disabled={!recipe.complete}>
                 <CardMedia className='w-1/10'>
                     <FastfoodIcon className="mb-0 mt-4 ml-3 p-0.5 bg-teal-600 fill-white" />
                 </ CardMedia>
                 <CardContent>
-                <div className="flex justify-between">
-                    <Typography variant="h6" component="div">
-                        {recipe.name}
-                    </Typography>
-                    <Typography variant="h5" color="text.secondary">
-                        {`€ ${recipe.totalPrice ? recipe.totalPrice.toFixed(1) : '-'}`}
-                    </Typography>
-                </div>
+                    <div className="flex justify-between">
+                        <Typography variant="h6" component="div">
+                            {recipe.name}
+                        </Typography>
+                        <Typography variant="h5" color="text.secondary">
+                            {`€ ${recipe.totalPrice ? recipe.totalPrice.toFixed(1) : '-'}`}
+                        </Typography>
+                    </div>
                 </CardContent>
             </CardActionArea>
         </Card>
