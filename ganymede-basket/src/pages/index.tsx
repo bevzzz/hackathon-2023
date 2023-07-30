@@ -9,7 +9,7 @@ import RecipeCard from '@/components/shoplist/RecipeCard';
 const inter = Inter({ subsets: ['latin'] })
 
 export const supermarketChains = [
-  "billa", "dm", "lidl", "spar", "penny", 
+  "billa", "dm", "lidl", "spar", "penny",
 ];
 
 export default function Home() {
@@ -27,12 +27,12 @@ export default function Home() {
         <div className='title mb-4 font-bold text-lg'>
           Home
         </div>
-      </div>
-      <StoreSwitch selected={store} stores={supermarketChains} handleStoreChange={(s: string) => setStore(s)} />
-      <div className='grid-cols-2'>
-        {menu.map((recipe, idx) => {
-          return <RecipeCard key={idx} recipe={recipe} />
-        })}
+        <StoreSwitch selected={store} stores={supermarketChains} handleStoreChange={(s: string) => setStore(s)} />
+        <div className='grid-cols-2'>
+          {menu.map((recipe, idx) => {
+            return <RecipeCard key={idx} recipe={recipe} />
+          })}
+        </div>
       </div>
       <BottomNav activePage='home'></BottomNav>
     </main>
