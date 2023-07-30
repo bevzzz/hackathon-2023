@@ -1,11 +1,11 @@
-import { Product } from "@/client/hotprices";
+import { Product, Unit } from "@/client/hotprices";
 import { ObjectId } from "mongodb";
 
 /** Ingredient describes the amount of certain product that's needed for a recipe */
 export interface Ingredient {
     searchTerm: string;
     quantity: number;
-    unit: string;
+    unit: Unit;
     prefs?: Record<string, Product>
 }
 

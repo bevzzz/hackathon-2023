@@ -35,10 +35,6 @@ const router = createRouter<NextApiRequest, NextApiResponse>()
         res.json(menu);
     });
 
-// export const config = {
-//     runtime: "edge",
-// };
-
 export default router.handler({
     onError(error, _req, res) {
         console.log(error)

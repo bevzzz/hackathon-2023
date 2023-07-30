@@ -1,7 +1,4 @@
 import { Db, MongoClient } from 'mongodb';
-import { NextApiRequest } from 'next';
-import { createEdgeRouter } from 'next-connect';
-import { NextFetchEvent, NextRequest } from 'next/server';
 
 const client = MongoClient.connect(process.env.MONGODB_URI!);
 

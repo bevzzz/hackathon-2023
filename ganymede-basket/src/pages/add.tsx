@@ -9,7 +9,7 @@ export default function Home() {
     <main>
       <div className="mt-20 mb-44 container px-4">
         <div className='font-bold text-lg'>
-          Create Basket
+          New recipe
         </div>
         <Shoplist></Shoplist>
       </div>

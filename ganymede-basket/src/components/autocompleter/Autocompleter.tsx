@@ -1,9 +1,14 @@
 import { useState } from "react";
 
-export default function Autocompleter(props: { addItem: Function }): JSX.Element {
-    const [text, setText] = useState('');
+type Props = {
+    handleAddIngredient: (name: string) => void
+}
+
+export default function Autocompleter({ handleAddIngredient }: Props): JSX.Element {
+    const [text, setText] = useState<string>('');
+
     const handleAdd = () => {
-        props.addItem(text);
+        handleAddIngredient(text);
         setText("");
     }
     return (
@@ -11,14 +16,16 @@ export default function Autocompleter(props: { addItem: Function }): JSX.Element
             <input
                 value={text}
                 onKeyDown={(event: any) => {
-                    if (event.key === "Enter") handleAdd()
+                    if (event.key === "Enter") {
+                        handleAdd()
+                    }
                 }}
                 onChange={e => setText(e.target.value)}
                 type="text"
-                placeholder='Name of Product...'
+                placeholder='Product search string'
                 className='autocomplete-input' />
             <button
-                onClick={() => handleAdd()}
+                onClick={handleAdd}
                 className='m-auto pr-4 pl-2'
             >
                 +

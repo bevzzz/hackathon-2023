@@ -11,7 +11,12 @@ type Category =  "fruitsAndVegetables" |
     "household" |
     "other"
 
-export interface Product {
+export type Unit = "kg" |
+    "g" |
+    "stk" |
+    "L"
+
+    export interface Product {
     name: string;
     store: string;
     price: number;
@@ -20,7 +25,6 @@ export interface Product {
     url: string;
     category: Category;
 }
-
 
 export type Products = Product[];
 
@@ -35,8 +39,6 @@ export interface SearchOptions {
 export const getProducts = async (name: string, options?: SearchOptions): Promise<Products> => {
     const mongo = await connect();
     const products = mongo.db.collection("products")
-
-    console.log(`searching name: ${name}, unit: ${options?.unit}`)
 
     const res = await products.find({
         name: { $regex: new RegExp(name) },
