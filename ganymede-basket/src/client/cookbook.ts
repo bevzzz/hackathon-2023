@@ -1,7 +1,6 @@
 import { Menu, MyRecipe, RecipeCalculated } from "@/types";
 
 export async function createRecipe(r: MyRecipe): Promise<string> {
-    console.log(`creating recipe ${JSON.stringify(r)}`)
     const res = await fetch("/api/recipe", {
         method: "POST",
         body: JSON.stringify(r),
@@ -10,9 +9,7 @@ export async function createRecipe(r: MyRecipe): Promise<string> {
         },
     });
 
-    console.log("parsing response")
     const recipe = await res.json();
-    console.log("success");
     return recipe.id as string;
 }
 

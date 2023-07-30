@@ -31,6 +31,7 @@ export async function calculateRecipeCost(r: MyRecipeDb, wantServings: number, s
     const complete = await asyncEvery(r.ingredients, async (ingr: Ingredient): Promise<boolean> => {
         let search = ingr.searchTerm;
         let options: SearchOptions = {
+            store,
             quantity: ingr.quantity,
             unit: ingr.unit,
         };
@@ -44,10 +45,11 @@ export async function calculateRecipeCost(r: MyRecipeDb, wantServings: number, s
 
         const products = await getProducts(search, options)
         if (!products || !products.length) {
-            console.log("incomplete")
             return false;
         }
         const product = products[0];
+
+        console.log(`(${store}) product ${product.name} quantinty=${product.quantity}${product.unit} wantServings=${wantServings}`)
         const ingrAdjusted = adjustPriceToServings(product, ingr, r, wantServings);
 
         ingredients.push(ingrAdjusted);

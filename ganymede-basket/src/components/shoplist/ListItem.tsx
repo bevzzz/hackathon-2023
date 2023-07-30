@@ -33,8 +33,6 @@ export default function ListItem({ ingredient, handleEdit }: Props): JSX.Element
             <div className='flex justify-between w-36 text-gray-500'>
                 <span className={`${ingredient.unit === "stk" ? "text-black" : ""}`} onClick={() => handleUnitChange("stk")}>Stk</span>
                 <span className={`${ingredient.unit === "g" ? "text-black" : ""}`} onClick={() => handleUnitChange("g")}>Gr</span>
-                <span className={`${ingredient.unit === "kg" ? "text-black" : ""}`} onClick={() => handleUnitChange("kg")}>Kg</span>
-                <span className={`${ingredient.unit === "L" ? "text-black" : ""}`} onClick={() => handleUnitChange("L")}>Liter</span>
                 <span className={`${ingredient.unit === "ml" ? "text-black" : ""}`} onClick={() => handleUnitChange("ml")}>ml</span>
             </div>
             <div className='pr-2 flex justify-between w-16 text-gray-500'>
