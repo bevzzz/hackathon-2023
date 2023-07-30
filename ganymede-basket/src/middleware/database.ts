@@ -1,5 +1,4 @@
 import { Db, MongoClient } from 'mongodb';
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
 const client = MongoClient.connect(process.env.MONGODB_URI!);
 
