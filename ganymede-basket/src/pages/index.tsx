@@ -27,7 +27,6 @@ export default function Home() {
         <div className='title mb-4 font-bold text-lg'>
           Home
         </div>
-        <RecipeList></RecipeList>
       </div>
       <StoreSwitch selected={store} stores={supermarketChains} handleStoreChange={(s: string) => setStore(s)} />
       <div className='grid-cols-2'>
