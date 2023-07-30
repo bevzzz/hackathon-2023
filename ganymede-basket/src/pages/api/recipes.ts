@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { createRouter } from "next-connect";
 import connect from "@/middleware/database";
-import { MyRecipe, Menu, RecipeCalculated } from "@/types"
+import { MyRecipeDb, Menu, RecipeCalculated } from "@/types"
 import { calculateRecipeCost } from "@/recipe";
 
 
@@ -10,9 +10,10 @@ const router = createRouter<NextApiRequest, NextApiResponse>()
         const mongo = await connect();
         const recipes = mongo.db.collection("recipes")
 
-        const all = await recipes.find({}).toArray() as unknown as MyRecipe[];
+        const all = await recipes.find({}).toArray() as unknown as MyRecipeDb[];
         if (!all.length) {
-            res.status(200).json([])
+            res.status(200).json([]);
+            return;
         }
 
         const {store: storeQuery, servings: servingsQuery} = req.query;
@@ -20,12 +21,12 @@ const router = createRouter<NextApiRequest, NextApiResponse>()
 
         let servings = 1;
         if (servingsQuery) {
-            const servingsString = Array.isArray(servings) ? servings[0] : servings;
+            const servingsString = Array.isArray(servingsQuery) ? servingsQuery[0] : servingsQuery;
             servings = Number(servingsString);
         }
 
         const menu: Menu = await Promise.all(
-            all.map(async (r: MyRecipe): Promise<RecipeCalculated> => {
+            all.map(async (r: MyRecipeDb): Promise<RecipeCalculated> => {
                 const result = await calculateRecipeCost(r, servings, store);
                 return result;
             })

@@ -1,4 +1,5 @@
 import { Product } from "@/client/hotprices";
+import { ObjectId } from "mongodb";
 
 /** Ingredient describes the amount of certain product that's needed for a recipe */
 export interface Ingredient {
@@ -18,6 +19,11 @@ export interface MyRecipe {
     servings: number;
 }
 
+/** MyRecipeDb represents a unique recipe stored in the database. */
+export interface MyRecipeDb extends MyRecipe {
+    _id: ObjectId;
+}
+
 /** IngredientCalculated stores the exact product that should be purchased, its quantity, and total price. */
 export interface IngredientCalculated {
     product: Product;
@@ -30,11 +36,13 @@ export interface IngredientCalculated {
  * their respective amounts and the total price of the recipe.
 */
 export interface RecipeCalculated {
+    id: string;
     name: string;
     servings: number;
     ingredients: IngredientCalculated[];
     totalPrice?: number;
     complete: boolean;
+    saved: MyRecipe;
 };
 
 /** Menu is a list of all recipes created by the user. */

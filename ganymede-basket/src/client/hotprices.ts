@@ -1,3 +1,5 @@
+import connect from "@/middleware/database";
+
 type Category =  "fruitsAndVegetables" |
     "backedGoods" | 
     "drinks" |
@@ -22,36 +24,31 @@ export interface Product {
 
 export type Products = Product[];
 
-const filters = [
-    //
-    "onlyBio",
-    "onlyDiscount",
-    
-    // categories
-    "fruitsAndVegetables",
-    "backedGoods", 
-    "drinks",
-    "refrigerated",
-    "frozen",
-    "staple",
-    "sweetAndSalty",
-    "careProducts",
-    "household",
-    "other",
-    
-    // Other
-    "exactMatch",
-]
-
 export interface SearchOptions {
     category?: Category;
     store?: string;
-    quantity?: number;
-    units?: string;
+    quantity: number;
+    unit: string;
 }
 
-const getQuery = (search: string, options?: SearchOptions): string => {
-    return `https://heisse-preise.io/?f=-;-;-;-;-;-;-;-;-;-;-;-;-;-;100;0;-;2023-07-29;.;.;.;${search}&l=-;.;price-asc;-&c=2023-07-29;-;-;2017-01-01;-;-&d=`
+
+export const getProducts = async (name: string, options?: SearchOptions): Promise<Products> => {
+    const mongo = await connect();
+    const products = mongo.db.collection("products")
+
+    console.log(`searching name: ${name}, unit: ${options?.unit}`)
+
+    const res = await products.find({
+        name: { $regex: new RegExp(name) },
+        unit: options?.unit,
+    })
+    .project({ priceHistory: false, description: false })
+    .toArray() as unknown as Products;
+    
+    if (!res.length) {
+        return [];
+    }
+    return res;
 }
 
 // {
@@ -74,12 +71,4 @@ const getQuery = (search: string, options?: SearchOptions): string => {
 // "bio": false,
 // "url": "/ueltje-Erdnuesse-geroestet---gesalzen-180g-116754",
 // "category": "03"
-// },
-
-
-export const getProducts = async (name: string, options?: SearchOptions): Promise<Products> => {
-    const query = getQuery(name, options)
-    const res = await fetch(query)
-    const products: Products = await res.json();
-    return products;
-}
+// }

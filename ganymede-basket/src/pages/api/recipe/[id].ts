@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { createRouter } from "next-connect";
 import connect from "@/middleware/database";
 import { ObjectId } from "mongodb";
-import { MyRecipe, RecipeCalculated } from "@/types"
+import { MyRecipeDb, RecipeCalculated } from "@/types"
 import { calculateRecipeCost } from "@/recipe";
 
 const router = createRouter<NextApiRequest, NextApiResponse>()
@@ -15,18 +15,18 @@ const router = createRouter<NextApiRequest, NextApiResponse>()
         if (!idQuery) {
             res.status(404);
         }
-
-        const recipe = await recipes.findOne({_id: new ObjectId(id)}) as unknown as MyRecipe;
+        
+        const recipe = await recipes.findOne({_id: new ObjectId(id)}) as unknown as MyRecipeDb;
         if (!recipe) {
             res.status(404)
         }
 
         const {store: storeQuery, servings: servingsQuery} = req.query;
         let store: string | undefined = Array.isArray(storeQuery) ? storeQuery[0] : storeQuery;
-
+        
         let servings = 1;
         if (servingsQuery) {
-            const servingsString = Array.isArray(servings) ? servings[0] : servings;
+            const servingsString = Array.isArray(servingsQuery) ? servingsQuery[0] : servingsQuery;
             servings = Number(servingsString);
         }
         

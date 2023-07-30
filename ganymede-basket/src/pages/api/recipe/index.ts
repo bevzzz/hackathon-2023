@@ -4,13 +4,17 @@ import connect from "@/middleware/database";
 import { MyRecipe } from "@/types"
 
 const router = createRouter<NextApiRequest, NextApiResponse>()
-    .post(async (req, res) => {
+    .post(async (req, res: NextApiResponse<{id: string}>) => {
         const mongo = await connect();
-        const recipes = mongo.db.collection("recipes")
+        const recipes = mongo.db.collection("recipes");
 
-        const recipe = await req.body.json() as MyRecipe;
+        const {body: recipe} = req;
+        if (!recipe) {
+            res.status(400).end();
+            return;
+        }
         const result = await recipes.insertOne(recipe);
-        res.status(201).json({ id: result.insertedId });
+        res.status(201).json({ id: result.insertedId.toString() });
     });
 
 // export const config = {
