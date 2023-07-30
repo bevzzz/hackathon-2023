@@ -41,7 +41,7 @@ export async function getMenu(store?: string, servings?: number): Promise<Menu> 
         search = {...search, servings: servings.toString() };
     }
 
-    const res = await fetch(`/api/recipe?` + new URLSearchParams(search));
+    const res = await fetch(`/api/recipes?` + new URLSearchParams(search));
     if (!res || !res.ok) {
         return [];
     }

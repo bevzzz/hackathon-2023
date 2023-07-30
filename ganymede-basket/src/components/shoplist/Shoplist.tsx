@@ -75,7 +75,6 @@ export default function Shoplist(): JSX.Element {
                     ingredients.map((ingr, idx) =>
                         <div key={idx} className="flex">
                             <ListItem ingredient={ingr} handleEdit={(i: Ingredient) => {
-                                console.log("ANFEFDFEFE")
                                 handleEditIngredient(idx, i);
                             }} />
                             <span onClick={() => handleDeleteIngredient(idx)} className="ml-2 px-2 text-white my-auto rounded-2xl bg-red-500">-</span>

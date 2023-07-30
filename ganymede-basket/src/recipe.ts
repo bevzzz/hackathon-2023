@@ -44,6 +44,7 @@ export async function calculateRecipeCost(r: MyRecipeDb, wantServings: number, s
 
         const products = await getProducts(search, options)
         if (!products || !products.length) {
+            console.log("incomplete")
             return false;
         }
         const product = products[0];

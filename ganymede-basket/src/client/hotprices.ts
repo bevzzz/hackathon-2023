@@ -14,9 +14,10 @@ type Category =  "fruitsAndVegetables" |
 export type Unit = "kg" |
     "g" |
     "stk" |
-    "L"
+    "L" |
+    "ml"
 
-    export interface Product {
+export interface Product {
     name: string;
     store: string;
     price: number;
@@ -35,10 +36,16 @@ export interface SearchOptions {
     unit: string;
 }
 
+export const supermarketChains = [
+    "billa", "dm", "lidl", "spar", "penny", 
+    // "dmDe", "hofer", "mpreis", "sparSi", "unimarkt", "reweDe", "penny", "mueller", "muellerDe", "bipa",
+];
 
 export const getProducts = async (name: string, options?: SearchOptions): Promise<Products> => {
     const mongo = await connect();
     const products = mongo.db.collection("products")
+
+    console.log(`search product ${name}, options: ${JSON.stringify(options)}`)
 
     const res = await products.find({
         name: { $regex: new RegExp(name) },
@@ -48,6 +55,7 @@ export const getProducts = async (name: string, options?: SearchOptions): Promis
     .toArray() as unknown as Products;
     
     if (!res.length) {
+        console.log("did not find anything")
         return [];
     }
     return res;
