@@ -43,11 +43,25 @@ export const getProducts = async (name: string, options?: SearchOptions): Promis
     const mongo = await connect();
     const products = mongo.db.collection("products")
 
-    const res = await products.find({
+    let filters: Record<string, any> = {
         name: { $regex: new RegExp(name) },
-        unit: options?.unit,
-        store: options?.store,
-    })
+    };
+
+    if (options?.unit) {
+        filters = {
+            ...filters,
+            unit: options?.unit,
+        };
+    }
+
+    if (options?.store) {
+        filters = {
+            ...filters,
+            store: options?.store,
+        };
+    }
+
+    const res = await products.find(filters)
     .project({ priceHistory: false, description: false })
     .toArray() as unknown as Products;
     
